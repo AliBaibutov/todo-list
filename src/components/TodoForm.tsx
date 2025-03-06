@@ -15,8 +15,10 @@ const TodoForm: FC<Props> = ({ addTodo }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addTodo(value);
-    setValue("");
+    if (value) {
+      addTodo(value);
+      setValue("");
+    }
   };
 
   useEffect(() => {
