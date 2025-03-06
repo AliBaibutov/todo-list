@@ -3,18 +3,31 @@ import { FC } from "react";
 
 type Props = {
   filterTodos: (filter: string) => void;
+  filter: string;
 };
 
-const Filter: FC<Props> = ({ filterTodos }) => {
+const Filter: FC<Props> = ({ filterTodos, filter }) => {
   return (
     <Stack direction="row">
-      <Button colorPalette={"green"} onClick={() => filterTodos("all")}>
+      <Button
+        disabled={filter === "all"}
+        colorPalette={"green"}
+        onClick={() => filterTodos("all")}
+      >
         All
       </Button>
-      <Button colorPalette={"green"} onClick={() => filterTodos("active")}>
+      <Button
+        disabled={filter === "active"}
+        colorPalette={"green"}
+        onClick={() => filterTodos("active")}
+      >
         Active
       </Button>
-      <Button colorPalette={"green"} onClick={() => filterTodos("completed")}>
+      <Button
+        disabled={filter === "completed "}
+        colorPalette={"green"}
+        onClick={() => filterTodos("completed")}
+      >
         Completed
       </Button>
     </Stack>

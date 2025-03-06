@@ -17,6 +17,7 @@ export type Todo = {
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [filteredTodos, setFilteredTodos] = useState<Todo[]>(todos);
+  const [filter, setFilter] = useState("all");
 
   useEffect(() => {
     setFilteredTodos(todos);
@@ -45,12 +46,15 @@ function App() {
     switch (filter) {
       case "completed":
         setFilteredTodos(todos.filter((todo) => todo.isCompleted));
+        setFilter("completed");
         break;
       case "active":
         setFilteredTodos(todos.filter((todo) => !todo.isCompleted));
+        setFilter("active");
         break;
       case "all":
         setFilteredTodos(todos);
+        setFilter("all");
         break;
 
       default:
@@ -82,7 +86,7 @@ function App() {
         <TodoList todos={filteredTodos} toggleComplete={toggleComplete} />
         <Footer>
           <RemainingTodos remainingTodosCount={remainingTodosCount} />
-          <Filter filterTodos={filterTodos} />
+          <Filter filterTodos={filterTodos} filter={filter} />
           <ClearTodos clearTodos={clearTodos} />
         </Footer>
       </Flex>
