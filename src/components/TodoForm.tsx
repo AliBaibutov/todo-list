@@ -20,7 +20,7 @@ const TodoForm: FC<Props> = ({ addTodo }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Flex gap="2" w="300px">
+      <Flex gap="2" w="600px">
         <Input placeholder="Add a todo" onChange={handleChange} value={value} />
         <Button type="submit" colorPalette={"green"}>
           Add

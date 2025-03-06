@@ -9,7 +9,7 @@ type Props = {
 
 const TodoList: FC<Props> = ({ todos }) => {
   return (
-    <Fieldset.Root w="300px">
+    <Fieldset.Root w="600px">
       <CheckboxGroup name="todos">
         <Fieldset.Content>
           {todos.map((todo) => (
