@@ -1,5 +1,5 @@
 import { Button, Flex, Input } from "@chakra-ui/react";
-import { FC, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 
 type Props = {
   addTodo: (todo: string) => void;
@@ -7,6 +7,7 @@ type Props = {
 
 const TodoForm: FC<Props> = ({ addTodo }) => {
   const [value, setValue] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -18,10 +19,19 @@ const TodoForm: FC<Props> = ({ addTodo }) => {
     setValue("");
   };
 
+  useEffect(() => {
+    if (inputRef.current) inputRef.current.focus();
+  }, []);
+
   return (
     <form onSubmit={handleSubmit}>
       <Flex gap="2" w="600px">
-        <Input placeholder="Add a todo" onChange={handleChange} value={value} />
+        <Input
+          placeholder="Add a todo"
+          onChange={handleChange}
+          value={value}
+          ref={inputRef}
+        />
         <Button type="submit" colorPalette={"green"}>
           Add
         </Button>
