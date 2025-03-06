@@ -28,6 +28,18 @@ function App() {
     ]);
   };
 
+  const toggleComplete = (id: string) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
+      )
+    );
+  };
+
+  const completedFilter = (todos: Todo[]) => {
+    setTodos(todos.filter((todo) => todo.isCompleted));
+  };
+
   return (
     <Container>
       <Flex
@@ -42,10 +54,10 @@ function App() {
           TODOS
         </Heading>
         <TodoForm addTodo={addTodo} />
-        <TodoList todos={todos} />
+        <TodoList todos={todos} toggleComplete={toggleComplete} />
         <Footer>
           <RemainingTodos />
-          <Filter />
+          <Filter completedFilter={completedFilter} todos={todos} />
           <ClearTodos />
         </Footer>
       </Flex>

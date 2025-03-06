@@ -5,9 +5,10 @@ import { FC } from "react";
 
 type Props = {
   todos: Todo[];
+  toggleComplete: (id: string) => void;
 };
 
-const TodoList: FC<Props> = ({ todos }) => {
+const TodoList: FC<Props> = ({ todos, toggleComplete }) => {
   return (
     <Fieldset.Root w="600px">
       <CheckboxGroup name="todos">
@@ -18,6 +19,8 @@ const TodoList: FC<Props> = ({ todos }) => {
               colorPalette={"green"}
               variant={"subtle"}
               key={todo.id}
+              onChange={() => toggleComplete(todo.id)}
+              checked={todo.isCompleted}
             >
               {todo.text}
             </Checkbox>
