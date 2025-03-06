@@ -1,4 +1,4 @@
-import { CheckboxGroup, Fieldset } from "@chakra-ui/react";
+import { CheckboxGroup, Fieldset, Text } from "@chakra-ui/react";
 import { Checkbox } from "./ui/checkbox";
 import { Todo } from "@/App";
 import { FC } from "react";
@@ -22,7 +22,7 @@ const TodoList: FC<Props> = ({ todos, toggleComplete }) => {
               onChange={() => toggleComplete(todo.id)}
               checked={todo.isCompleted}
             >
-              {todo.text}
+              <Text>{todo.text}</Text>
             </Checkbox>
           ))}
         </Fieldset.Content>

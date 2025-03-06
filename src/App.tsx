@@ -3,7 +3,7 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import RemainingTodos from "./components/RemainingTodos";
 import Filter from "./components/Filter";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import ClearTodos from "./components/ClearTodos";
 import { Footer } from "./components/Footer";
@@ -16,6 +16,11 @@ export type Todo = {
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [filteredTodos, setFilteredTodos] = useState<Todo[]>(todos);
+
+  useEffect(() => {
+    setFilteredTodos(todos);
+  }, [todos]);
 
   const addTodo = (todo: string) => {
     setTodos([
@@ -36,8 +41,26 @@ function App() {
     );
   };
 
-  const completedFilter = (todos: Todo[]) => {
-    setTodos(todos.filter((todo) => todo.isCompleted));
+  const filterTodos = (filter: string) => {
+    switch (filter) {
+      case "completed":
+        setFilteredTodos([...todos].filter((todo) => todo.isCompleted));
+        break;
+      case "active":
+        setFilteredTodos([...todos].filter((todo) => !todo.isCompleted));
+        break;
+      case "all":
+        setFilteredTodos(todos);
+        break;
+
+      default:
+        setFilteredTodos(todos);
+        break;
+    }
+  };
+
+  const clearTodos = () => {
+    setTodos([]);
   };
 
   return (
@@ -54,11 +77,11 @@ function App() {
           TODOS
         </Heading>
         <TodoForm addTodo={addTodo} />
-        <TodoList todos={todos} toggleComplete={toggleComplete} />
+        <TodoList todos={filteredTodos} toggleComplete={toggleComplete} />
         <Footer>
           <RemainingTodos />
-          <Filter completedFilter={completedFilter} todos={todos} />
-          <ClearTodos />
+          <Filter filterTodos={filterTodos} />
+          <ClearTodos clearTodos={clearTodos} />
         </Footer>
       </Flex>
     </Container>

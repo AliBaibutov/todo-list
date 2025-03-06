@@ -1,18 +1,20 @@
-import { Todo } from "@/App";
 import { Button, Stack } from "@chakra-ui/react";
 import { FC } from "react";
 
 type Props = {
-  todos: Todo[];
-  completedFilter: (todos: Todo[]) => void;
+  filterTodos: (filter: string) => void;
 };
 
-const Filter: FC<Props> = ({ completedFilter, todos }) => {
+const Filter: FC<Props> = ({ filterTodos }) => {
   return (
     <Stack direction="row">
-      <Button colorPalette={"green"}>All</Button>
-      <Button colorPalette={"green"}>Active</Button>
-      <Button colorPalette={"green"} onClick={() => completedFilter(todos)}>
+      <Button colorPalette={"green"} onClick={() => filterTodos("all")}>
+        All
+      </Button>
+      <Button colorPalette={"green"} onClick={() => filterTodos("active")}>
+        Active
+      </Button>
+      <Button colorPalette={"green"} onClick={() => filterTodos("completed")}>
         Completed
       </Button>
     </Stack>
