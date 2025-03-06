@@ -44,10 +44,10 @@ function App() {
   const filterTodos = (filter: string) => {
     switch (filter) {
       case "completed":
-        setFilteredTodos([...todos].filter((todo) => todo.isCompleted));
+        setFilteredTodos(todos.filter((todo) => todo.isCompleted));
         break;
       case "active":
-        setFilteredTodos([...todos].filter((todo) => !todo.isCompleted));
+        setFilteredTodos(todos.filter((todo) => !todo.isCompleted));
         break;
       case "all":
         setFilteredTodos(todos);
@@ -62,6 +62,8 @@ function App() {
   const clearTodos = () => {
     setTodos([]);
   };
+
+  const remainingTodosCount = todos.filter((todo) => !todo.isCompleted).length;
 
   return (
     <Container>
@@ -79,7 +81,7 @@ function App() {
         <TodoForm addTodo={addTodo} />
         <TodoList todos={filteredTodos} toggleComplete={toggleComplete} />
         <Footer>
-          <RemainingTodos />
+          <RemainingTodos remainingTodosCount={remainingTodosCount} />
           <Filter filterTodos={filterTodos} />
           <ClearTodos clearTodos={clearTodos} />
         </Footer>
