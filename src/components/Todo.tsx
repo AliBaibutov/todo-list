@@ -16,6 +16,8 @@ const Todo: FC<Props> = ({ todo, toggleComplete }) => {
       variant={"subtle"}
       onChange={() => toggleComplete(todo.id)}
       checked={todo.isCompleted}
+      textDecoration={todo.isCompleted ? "line-through" : "none"}
+      opacity={todo.isCompleted ? 0.5 : 1}
     >
       <Text>{todo.text}</Text>
     </Checkbox>
