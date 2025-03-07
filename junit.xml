@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="5" failures="0" errors="0" time="7.03">
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2025-03-06T22:47:27" time="3.284" tests="5">
-    <testcase classname=" renders the heading" name=" renders the heading" time="0.136">
+<testsuites name="jest tests" tests="5" failures="0" errors="0" time="7.232">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2025-03-07T12:03:36" time="3.396" tests="5">
+    <testcase classname=" renders the heading" name=" renders the heading" time="0.141">
     </testcase>
-    <testcase classname=" adds a new todo" name=" adds a new todo" time="0.104">
+    <testcase classname=" adds a new todo" name=" adds a new todo" time="0.108">
     </testcase>
-    <testcase classname=" toggles a todo&apos;s completion status" name=" toggles a todo&apos;s completion status" time="0.121">
+    <testcase classname=" toggles a todo&apos;s completion status" name=" toggles a todo&apos;s completion status" time="0.106">
     </testcase>
-    <testcase classname=" filters todos" name=" filters todos" time="0.094">
+    <testcase classname=" filters todos" name=" filters todos" time="0.092">
     </testcase>
-    <testcase classname=" clears all todos" name=" clears all todos" time="0.071">
+    <testcase classname=" clears all todos" name=" clears all todos" time="0.062">
     </testcase>
   </testsuite>
 </testsuites>

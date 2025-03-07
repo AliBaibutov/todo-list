@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
 import App from "./App";
 import "@testing-library/jest-dom";
@@ -6,7 +6,6 @@ import "@testing-library/jest-dom";
 const renderWithChakraProvider = (ui: React.ReactElement) => {
   return render(<ChakraProvider value={defaultSystem}>{ui}</ChakraProvider>);
 };
-
 test("renders the heading", () => {
   renderWithChakraProvider(<App />);
   const headingElements = screen.getAllByText(/TODOS/i);
@@ -15,7 +14,7 @@ test("renders the heading", () => {
 
 test("adds a new todo", () => {
   renderWithChakraProvider(<App />);
-  const inputElement = screen.getByPlaceholderText(/Add a todo/i);
+  const inputElement = screen.getByPlaceholderText(/Add a Todo/i);
   const addButton = screen.getByText(/Add/i);
 
   fireEvent.change(inputElement, { target: { value: "New Todo" } });
@@ -25,7 +24,7 @@ test("adds a new todo", () => {
   expect(todoElement).toBeInTheDocument();
 });
 
-test("toggles a todo's completion status", () => {
+test("toggles a todo's completion status", async () => {
   renderWithChakraProvider(<App />);
   const inputElement = screen.getByPlaceholderText(/Add a todo/i);
   const addButton = screen.getByText(/Add/i);
@@ -40,7 +39,7 @@ test("toggles a todo's completion status", () => {
     : null;
   expect(checkbox).not.toBeNull();
   if (checkbox) {
-    fireEvent.click(checkbox);
+    await act(async () => fireEvent.click(checkbox));
   }
 
   expect(checkbox).toBeChecked();

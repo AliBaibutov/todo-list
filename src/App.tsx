@@ -8,15 +8,15 @@ import { nanoid } from "nanoid";
 import ClearTodos from "./components/ClearTodos";
 import { Footer } from "./components/Footer";
 
-export type Todo = {
+export type TodoType = {
   id: string;
   text: string;
   isCompleted: boolean;
 };
 
 function App() {
-  const [todos, setTodos] = useState<Todo[]>([]);
-  const [filteredTodos, setFilteredTodos] = useState<Todo[]>(todos);
+  const [todos, setTodos] = useState<TodoType[]>([]);
+  const [filteredTodos, setFilteredTodos] = useState<TodoType[]>(todos);
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {

@@ -1,10 +1,10 @@
-import { CheckboxGroup, Fieldset, Text } from "@chakra-ui/react";
-import { Checkbox } from "./ui/checkbox";
-import { Todo } from "@/App";
+import { CheckboxGroup, Fieldset } from "@chakra-ui/react";
+import { TodoType } from "@/App";
 import { FC } from "react";
+import Todo from "./Todo";
 
 type Props = {
-  todos: Todo[];
+  todos: TodoType[];
   toggleComplete: (id: string) => void;
 };
 
@@ -14,16 +14,7 @@ const TodoList: FC<Props> = ({ todos, toggleComplete }) => {
       <CheckboxGroup name="todos">
         <Fieldset.Content>
           {todos.map((todo) => (
-            <Checkbox
-              size={"lg"}
-              colorPalette={"green"}
-              variant={"subtle"}
-              key={todo.id}
-              onChange={() => toggleComplete(todo.id)}
-              checked={todo.isCompleted}
-            >
-              <Text>{todo.text}</Text>
-            </Checkbox>
+            <Todo key={todo.id} todo={todo} toggleComplete={toggleComplete} />
           ))}
         </Fieldset.Content>
       </CheckboxGroup>
