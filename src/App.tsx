@@ -1,4 +1,4 @@
-import { Container, Flex, Heading } from "@chakra-ui/react";
+import { Container, Heading } from "@chakra-ui/react";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import RemainingTodos from "./components/RemainingTodos";
@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import ClearTodos from "./components/ClearTodos";
 import { Footer } from "./components/Footer";
+import TodoWrapper from "./components/TodoWrapper";
 
 export type TodoType = {
   id: string;
@@ -71,14 +72,7 @@ function App() {
 
   return (
     <Container>
-      <Flex
-        direction="column"
-        align="center"
-        justify="start"
-        h="100vh"
-        gap={4}
-        pt={8}
-      >
+      <TodoWrapper>
         <Heading mb={4} fontSize={"5xl"}>
           TODOS
         </Heading>
@@ -89,7 +83,7 @@ function App() {
           <Filter filterTodos={filterTodos} filter={filter} />
           <ClearTodos clearTodos={clearTodos} />
         </Footer>
-      </Flex>
+      </TodoWrapper>
     </Container>
   );
 }

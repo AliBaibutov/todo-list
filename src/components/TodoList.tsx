@@ -10,7 +10,7 @@ type Props = {
 
 const TodoList: FC<Props> = ({ todos, toggleComplete }) => {
   return (
-    <Fieldset.Root w="600px">
+    <Fieldset.Root w={{ base: "300px", md: "600px" }}>
       <CheckboxGroup name="todos">
         <Fieldset.Content>
           {todos.map((todo) => (

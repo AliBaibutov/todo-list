@@ -8,7 +8,7 @@ type Props = {
 
 const Filter: FC<Props> = ({ filterTodos, filter }) => {
   return (
-    <Stack direction="row">
+    <Stack direction={{ base: "column", md: "row" }}>
       <Button
         disabled={filter === "all"}
         colorPalette={"green"}
