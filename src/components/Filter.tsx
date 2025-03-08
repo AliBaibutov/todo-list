@@ -24,7 +24,7 @@ const Filter: FC<Props> = ({ filterTodos, filter }) => {
         Active
       </Button>
       <Button
-        disabled={filter === "completed "}
+        disabled={filter === "completed"}
         colorPalette={"green"}
         onClick={() => filterTodos("completed")}
       >

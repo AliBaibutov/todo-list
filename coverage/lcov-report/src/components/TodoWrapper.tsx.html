@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/components/TodoList.tsx</title>
+    <title>Code coverage report for src/components/TodoWrapper.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/components</a> TodoList.tsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/components</a> TodoWrapper.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>25/25</span>
+                <span class='fraction'>24/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>25/25</span>
+                <span class='fraction'>24/24</span>
             </div>
         
             
@@ -87,10 +87,7 @@
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -104,7 +101,8 @@
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
-<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">21x</span>
@@ -113,31 +111,30 @@
 <span class="cline-any cline-yes">21x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { CheckboxGroup, Fieldset } from "@chakra-ui/react";
-import { TodoType } from "@/App";
-import { FC } from "react";
-import Todo from "./Todo";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Flex } from "@chakra-ui/react";
+&nbsp;
+import { FC, ReactNode } from "react";
 &nbsp;
 type Props = {
-  todos: TodoType[];
-  toggleComplete: (id: string) =&gt; void;
+  children: ReactNode;
 };
 &nbsp;
-const TodoList: FC&lt;Props&gt; = ({ todos, toggleComplete }) =&gt; {
+const TodoWrapper: FC&lt;Props&gt; = ({ children }) =&gt; {
   return (
-    &lt;Fieldset.Root w={{ base: "300px", md: "600px" }}&gt;
-      &lt;CheckboxGroup name="todos"&gt;
-        &lt;Fieldset.Content&gt;
-          {todos.map((todo) =&gt; (
-            &lt;Todo key={todo.id} todo={todo} toggleComplete={toggleComplete} /&gt;
-          ))}
-        &lt;/Fieldset.Content&gt;
-      &lt;/CheckboxGroup&gt;
-    &lt;/Fieldset.Root&gt;
+    &lt;Flex
+      direction="column"
+      align="center"
+      justify="start"
+      h="100vh"
+      gap={4}
+      pt={8}
+    &gt;
+      {children}
+    &lt;/Flex&gt;
   );
 };
 &nbsp;
-export default TodoList;
+export default TodoWrapper;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
