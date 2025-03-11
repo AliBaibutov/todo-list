@@ -33,6 +33,8 @@ function App() {
         isCompleted: false,
       },
     ]);
+
+    setFilter("all");
   };
 
   const toggleComplete = (id: string) => {
