@@ -1,3 +1,4 @@
+import { active, all, completed } from "@/constants";
 import { Button, Stack } from "@chakra-ui/react";
 import { FC } from "react";
 
@@ -10,23 +11,23 @@ const Filter: FC<Props> = ({ filterTodos, filter }) => {
   return (
     <Stack direction={{ base: "column", md: "row" }}>
       <Button
-        disabled={filter === "all"}
+        disabled={filter === all}
         colorPalette={"green"}
-        onClick={() => filterTodos("all")}
+        onClick={() => filterTodos(all)}
       >
         All
       </Button>
       <Button
-        disabled={filter === "active"}
+        disabled={filter === active}
         colorPalette={"green"}
-        onClick={() => filterTodos("active")}
+        onClick={() => filterTodos(active)}
       >
         Active
       </Button>
       <Button
-        disabled={filter === "completed"}
+        disabled={filter === completed}
         colorPalette={"green"}
-        onClick={() => filterTodos("completed")}
+        onClick={() => filterTodos(completed)}
       >
         Completed
       </Button>

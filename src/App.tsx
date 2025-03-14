@@ -8,6 +8,7 @@ import { nanoid } from "nanoid";
 import ClearTodos from "./components/ClearTodos";
 import { Footer } from "./components/Footer";
 import TodoWrapper from "./components/TodoWrapper";
+import { active, all, completed } from "./constants";
 
 export type TodoType = {
   id: string;
@@ -34,7 +35,7 @@ function App() {
       },
     ]);
 
-    setFilter("all");
+    setFilter(all);
   };
 
   const toggleComplete = (id: string) => {
@@ -43,21 +44,23 @@ function App() {
         todo.id === id ? { ...todo, isCompleted: !todo.isCompleted } : todo
       )
     );
+
+    setFilter(all);
   };
 
   const filterTodos = (filter: string) => {
     switch (filter) {
-      case "completed":
+      case completed:
         setFilteredTodos(todos.filter((todo) => todo.isCompleted));
-        setFilter("completed");
+        setFilter(completed);
         break;
-      case "active":
+      case active:
         setFilteredTodos(todos.filter((todo) => !todo.isCompleted));
-        setFilter("active");
+        setFilter(active);
         break;
-      case "all":
+      case all:
         setFilteredTodos(todos);
-        setFilter("all");
+        setFilter(all);
         break;
 
       default:
