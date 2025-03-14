@@ -85,7 +85,11 @@ function App() {
         <TodoList todos={filteredTodos} toggleComplete={toggleComplete} />
         <Footer>
           <RemainingTodos remainingTodosCount={remainingTodosCount} />
-          <Filter filterTodos={filterTodos} filter={filter} />
+          <Filter
+            todosLength={todos.length}
+            filterTodos={filterTodos}
+            filter={filter}
+          />
           <ClearTodos clearTodos={clearTodos} />
         </Footer>
       </TodoWrapper>
