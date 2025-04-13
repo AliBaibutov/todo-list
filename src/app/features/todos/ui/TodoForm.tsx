@@ -1,13 +1,11 @@
 import { Button, Flex, Input } from "@chakra-ui/react";
-import { FC, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useTodoContext } from "../model/todo-context";
 
-type Props = {
-  addTodo: (todo: string) => void;
-};
-
-const TodoForm: FC<Props> = ({ addTodo }) => {
+const TodoForm = () => {
   const [value, setValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const { addTodo } = useTodoContext();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);

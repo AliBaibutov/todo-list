@@ -1,14 +1,17 @@
-import { TodoType } from "@/App";
-import { Checkbox } from "./ui/checkbox";
 import { FC } from "react";
 import { Text } from "@chakra-ui/react";
+import { Checkbox } from "@/app/shared/ui/checkbox";
+import {
+  TodoType,
+  useTodoContext,
+} from "@/app/features/todos/model/todo-context";
 
 type Props = {
   todo: TodoType;
-  toggleComplete: (id: string) => void;
 };
 
-const Todo: FC<Props> = ({ todo, toggleComplete }) => {
+const Todo: FC<Props> = ({ todo }) => {
+  const { toggleComplete } = useTodoContext();
   return (
     <Checkbox
       size={"lg"}

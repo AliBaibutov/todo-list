@@ -1,11 +1,7 @@
 import { Button } from "@chakra-ui/react";
-import { FC } from "react";
-
-type Props = {
-  clearTodos: () => void;
-};
-
-const ClearTodos: FC<Props> = ({ clearTodos }) => {
+import { useTodoContext } from "../model/todo-context";
+const ClearTodos = () => {
+  const { clearTodos } = useTodoContext();
   return (
     <Button colorPalette={"red"} onClick={clearTodos}>
       Clear todos

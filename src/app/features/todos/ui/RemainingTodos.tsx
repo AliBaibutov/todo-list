@@ -1,11 +1,8 @@
 import { Badge } from "@chakra-ui/react";
-import { FC } from "react";
+import { useTodoContext } from "../model/todo-context";
 
-type Props = {
-  remainingTodosCount: number;
-};
-
-const RemainingTodos: FC<Props> = ({ remainingTodosCount }) => {
+const RemainingTodos = () => {
+  const { remainingTodosCount } = useTodoContext();
   return (
     <Badge variant={"outline"} size={"lg"}>
       {remainingTodosCount} todos left

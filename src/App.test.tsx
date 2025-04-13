@@ -1,88 +1,61 @@
-import { render, screen, fireEvent, act } from "@testing-library/react";
-import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
-import App from "./App";
+import { act, renderHook } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import {
+  TodoProvider,
+  useTodoContext,
+} from "./app/features/todos/model/todo-context";
+import { COMPLETED } from "./app/shared/consts/filters";
 
-const renderWithChakraProvider = (ui: React.ReactElement) => {
-  return render(<ChakraProvider value={defaultSystem}>{ui}</ChakraProvider>);
-};
-test("renders the heading", () => {
-  renderWithChakraProvider(<App />);
-  const headingElements = screen.getAllByText(/TODOS/i);
-  expect(headingElements[0]).toBeInTheDocument();
-});
+describe("TodoProvider", () => {
+  it("add todo", () => {
+    const { result } = renderHook(() => useTodoContext(), {
+      wrapper: ({ children }) => <TodoProvider>{children}</TodoProvider>,
+    });
+    const todosBefore = result.current.todos;
+    act(() => {
+      result.current.addTodo("new todo");
+    });
+    const todosAfter = result.current.todos;
+    expect(todosAfter.length).toBe(todosBefore.length + 1);
+  });
 
-test("adds a new todo", () => {
-  renderWithChakraProvider(<App />);
-  const inputElement = screen.getByPlaceholderText(/Add a Todo/i);
-  const addButton = screen.getByText(/Add/i);
+  it("toggle complete", () => {
+    const { result } = renderHook(() => useTodoContext(), {
+      wrapper: ({ children }) => <TodoProvider>{children}</TodoProvider>,
+    });
+    act(() => {
+      result.current.addTodo("new todo");
+    });
+    const todosBefore = result.current.todos;
+    act(() => {
+      result.current.toggleComplete(todosBefore[0].id);
+    });
+    const todosAfter = result.current.todos;
+    expect(todosAfter[0].isCompleted).toBe(!todosBefore[0].isCompleted);
+  });
 
-  fireEvent.change(inputElement, { target: { value: "New Todo" } });
-  fireEvent.click(addButton);
+  it("filter todos", () => {
+    const { result } = renderHook(() => useTodoContext(), {
+      wrapper: ({ children }) => <TodoProvider>{children}</TodoProvider>,
+    });
+    const todosBefore = result.current.todos;
+    act(() => {
+      result.current.filterTodos(COMPLETED);
+    });
+    const todosAfter = result.current.filteredTodos;
+    expect(todosAfter.length).toBe(
+      todosBefore.filter((todo) => todo.isCompleted).length
+    );
+  });
 
-  const todoElement = screen.getByText(/New Todo/i);
-  expect(todoElement).toBeInTheDocument();
-});
-
-test("toggles a todo's completion status", async () => {
-  renderWithChakraProvider(<App />);
-  const inputElement = screen.getByPlaceholderText(/Add a todo/i);
-  const addButton = screen.getByText(/Add/i);
-
-  fireEvent.change(inputElement, { target: { value: "New Todo" } });
-  fireEvent.click(addButton);
-
-  const todoElement = screen.getByText(/New Todo/i);
-  const labelElement = todoElement.closest("label");
-  const checkbox = labelElement
-    ? labelElement.querySelector("input[type='checkbox']")
-    : null;
-  expect(checkbox).not.toBeNull();
-  if (checkbox) {
-    await act(async () => fireEvent.click(checkbox));
-  }
-
-  expect(checkbox).toBeChecked();
-});
-
-test("filters todos", () => {
-  renderWithChakraProvider(<App />);
-  const inputElement = screen.getByPlaceholderText(/Add a todo/i);
-  const addButton = screen.getByText(/Add/i);
-
-  fireEvent.change(inputElement, { target: { value: "Completed Todo" } });
-  fireEvent.click(addButton);
-
-  const todoElement = screen.getByText(/Completed Todo/i);
-  fireEvent.click(todoElement);
-
-  const filterCompletedButtons = screen.getAllByText(/Completed/i);
-  const filterCompletedButton = filterCompletedButtons.find(
-    (button) => button.tagName === "BUTTON"
-  );
-  if (filterCompletedButton) {
-    fireEvent.click(filterCompletedButton);
-  }
-
-  expect(todoElement).toBeInTheDocument();
-
-  const filterActiveButton = screen.getByText(/Active/i);
-  fireEvent.click(filterActiveButton);
-
-  expect(todoElement).not.toBeInTheDocument();
-});
-
-test("clears all todos", () => {
-  renderWithChakraProvider(<App />);
-  const inputElement = screen.getByPlaceholderText(/Add a todo/i);
-  const addButton = screen.getByText(/Add/i);
-
-  fireEvent.change(inputElement, { target: { value: "New Todo" } });
-  fireEvent.click(addButton);
-
-  const clearButton = screen.getByText(/Clear/i);
-  fireEvent.click(clearButton);
-
-  const todoElement = screen.queryByText(/New Todo/i);
-  expect(todoElement).not.toBeInTheDocument();
+  it("clear todos", () => {
+    const { result } = renderHook(() => useTodoContext(), {
+      wrapper: ({ children }) => <TodoProvider>{children}</TodoProvider>,
+    });
+    act(() => {
+      result.current.clearTodos();
+    });
+    const todosAfter = result.current.todos;
+    expect(todosAfter.length).toBe(0);
+  });
 });
